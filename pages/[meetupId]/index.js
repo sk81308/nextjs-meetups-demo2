@@ -53,7 +53,13 @@ export async function getStaticPaths() {
   return {
     // Set fallback: false, to indicated that I have indicated all paths
     // Set fallback: true, to indicated that only some of teh path is indicated
-    fallback: false,
+
+    // We can set fallback to true, or even better, to 'blocking'. When you set fallback to true or to blocking,
+    // you're telling NextJS that the list of paths which you're specifying here, might not be exhaustive,
+    // there might be more valid pages. And, therefore, when fallback is set to true or to blocking,
+    // NextJS will not respond with a 404 page if it can't find the page immediately.
+
+    fallback: 'blocking',
     paths: meetups.map((meetup) => ({
       params: { meetupId: meetup._id.toString() },
     })),
